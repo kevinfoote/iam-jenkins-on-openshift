@@ -1,4 +1,4 @@
-FROM image-registry.openshift-image-registry.svc:5000/oai-public/jenkins@sha256:fa285cf340afa239cc4a1723384f3e1060a9915458952cc6d0b737bbb1ac3984 as jenkins
+FROM image-registry.openshift-image-registry.svc:5000/openshift/jenkins@sha256:81dc3755056f60a34693121d0da1e93deaaf00d86a72a6a2e5e259a7a09c881c as jenkins
 
 USER root
 COPY run /usr/libexec/s2i/run
