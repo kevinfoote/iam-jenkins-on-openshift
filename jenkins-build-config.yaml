@@ -6,11 +6,11 @@ spec:
     runPolicy: "Serial"
     source:
         git:
-            uri: "https://gitlab.eurecom.fr/oai/openair-ci-sandbox.git"
-            ref: "jenkins-image-maintenance"
+            uri: "https://github.com/UCBoulder/iam-jenkins-on-openshift"
+            ref: "main"
     strategy:
         dockerStrategy:
-            dockerfilePath: "docker/Dockerfile.rhel8.oc4"
+            dockerfilePath: "Dockerfile"
     output:
         to:
             kind: "ImageStreamTag"
