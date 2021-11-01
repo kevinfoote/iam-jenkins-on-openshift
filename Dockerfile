@@ -1,9 +1,9 @@
-#FROM image-registry.openshift-image-registry.svc:5000/openshift/jenkins@sha256:81dc3755056f60a34693121d0da1e93deaaf00d86a72a6a2e5e259a7a09c881c as jenkins
+FROM image-registry.openshift-image-registry.svc:5000/openshift/jenkins@sha256:81dc3755056f60a34693121d0da1e93deaaf00d86a72a6a2e5e259a7a09c881c as jenkins
 #FROM image-registry.openshift-image-registry.svc:5000/openshift/jenkins@sha256:e0a054d0a2e3088eb9ac6c65149fec386fefcf2aacc7181fa806cf2fad190a4c as jenkins
-FROM quay.io/openshift/origin-jenkins@sha256:ed8605f19d17ce84e78aaaac932a347b24ffcd1827d73258ff5628d6366d16df as jenkins
+#FROM quay.io/openshift/origin-jenkins@sha256:ed8605f19d17ce84e78aaaac932a347b24ffcd1827d73258ff5628d6366d16df as jenkins
 
 USER root
-COPY run.sh /usr/local/bin/run.sh
+COPY run_ucb.sh /usr/local/bin/run.sh
 RUN chmod 755 /usr/local/bin/run.sh
 
 WORKDIR /usr/lib/jenkins/
@@ -15,4 +15,4 @@ VOLUME ["/var/lib/jenkins"]
 
 USER 1001
 #ENTRYPOINT ["/usr/bin/go-init", "-main", "/usr/libexec/s2i/run"]
-#CMD /usr/local/bin/run.sh
+CMD /usr/local/bin/run.sh
