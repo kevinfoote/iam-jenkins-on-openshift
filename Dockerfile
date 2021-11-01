@@ -3,7 +3,7 @@ FROM image-registry.openshift-image-registry.svc:5000/openshift/jenkins@sha256:8
 #FROM quay.io/openshift/origin-jenkins@sha256:ed8605f19d17ce84e78aaaac932a347b24ffcd1827d73258ff5628d6366d16df as jenkins
 
 USER root
-RUN yum install -y jenkins-plugin-openshift openshift-origin-cartridge-jenkins
+#RUN yum install -y jenkins-plugin-openshift openshift-origin-cartridge-jenkins
 COPY run_ucb.sh /usr/local/bin/run.sh
 RUN cp -p /usr/libexec/s2i/run /usr/libexec/s2i/run.orig
 RUN rm -f /usr/libexec/s2i/run
