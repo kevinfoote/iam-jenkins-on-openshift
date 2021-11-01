@@ -4,6 +4,10 @@ FROM image-registry.openshift-image-registry.svc:5000/openshift/jenkins@sha256:8
 
 USER root
 COPY run_ucb.sh /usr/local/bin/run.sh
+RUN cp -p /usr/libexec/s2i/run /usr/libexec/s2i/run.orig
+RUN rm -f /usr/libexec/s2i/run
+COPY run_ucb.sh /usr/libexec/s2i/run
+RUN chmod 755 /usr/libexec/s2i/run
 RUN chmod 755 /usr/local/bin/run.sh
 
 WORKDIR /usr/lib/jenkins/
