@@ -4,5 +4,5 @@ metadata:
     name: jenkins
     namespace: oit-iam-builder
 status:
-    tag: 2.303.2
+    tag: latest
 

@@ -134,7 +134,7 @@
 										"value": "/var/lib/jenkins/proxy.yaml"
 									}
 								],
-								"image": "jenkins:2.303.2",
+								"image": "jenkins:latest",
 								"imagePullPolicy": "IfNotPresent",
 								"livenessProbe": {
 									"failureThreshold": 2,
