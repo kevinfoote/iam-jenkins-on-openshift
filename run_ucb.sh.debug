@@ -10,9 +10,12 @@
 default_version=$(cat /tmp/release.version)
 JENKINS_SLAVE_IMAGE_TAG=${JENKINS_SLAVE_IMAGE_TAG:-${default_version}}
 
+echo "#### DEBUG ### Sourcing /usr/local/bin/jenkins-common.sh"
 source /usr/local/bin/jenkins-common.sh
+echo "#### DEBUG ### Sourcing /usr/local/bin/kube-slave-common.sh"
 source /usr/local/bin/kube-slave-common.sh
 
+echo "#### DEBUG ### Calling 'shopt -s dotglob'"
 shopt -s dotglob
 
 create_jenkins_location_configuration_xml() {
@@ -30,15 +33,24 @@ create_jenkins_location_configuration_xml() {
   envsubst < "${JENKINS_HOME}/jenkins.model.JenkinsLocationConfiguration.xml.tpl" > "${JENKINS_HOME}/jenkins.model.JenkinsLocationConfiguration.xml"
 }
 
+echo "#### DEBUG ### Calling create_jenkins_location_configuration_xml function"
 create_jenkins_location_configuration_xml
+echo "#### DEBUG ### Done calling create_jenkins_location_configuration_xml function"
 
 function update_admin_password() {
+  echo "#### DEBUG ### Beginning the update_admin_password function"
   # get random admin dir
   ADMIN_DIR=`ls /var/lib/jenkins/users | grep admin`
   ls ${JENKINS_HOME}/users/${ADMIN_DIR}
+  echo "#### DEBUG ### The value of JENKINS_PASSWORD is : ${JENKINS_PASSWORD}"
+  echo "#### DEBUG ### Starting to call obfuscate_password and saving the result to new_password_hash"
   new_password_hash=$(obfuscate_password ${JENKINS_PASSWORD:-password})
+  echo "#### DEBUG ### The value of new_password_hash is : ${new_password_hash}"
+  echo "#### DEBUG ### Before calling sed the passwordHash entry in ${JENKINS_HOME}/users/${ADMIN_DIR}/config.xml is `grep '<passwordHash>' ${JENKINS_HOME}/users/${ADMIN_DIR}/config.xml`"
   sed -i "s,<passwordHash>.*</passwordHash>,<passwordHash>#jbcrypt:$new_password_hash</passwordHash>,g" "${JENKINS_HOME}/users/${ADMIN_DIR}/config.xml"
+  echo "#### DEBUG ### After calling sed the passwordHash entry in ${JENKINS_HOME}/users/${ADMIN_DIR}/config.xml is `grep '<passwordHash>' ${JENKINS_HOME}/users/${ADMIN_DIR}/config.xml`"
   echo $new_password_hash > ${JENKINS_HOME}/password
+  echo "#### DEBUG ### End of the update_admin_password function"
 }
 
 function create_jenkins_config_xml() {

@@ -19,5 +19,4 @@ RUN rm -f jenkins.war && \
 VOLUME ["/var/lib/jenkins"]
 
 USER 1001
-#ENTRYPOINT ["/usr/bin/go-init", "-main", "/usr/libexec/s2i/run"]
 CMD /usr/local/bin/run.sh
