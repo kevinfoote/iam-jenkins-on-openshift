@@ -1,7 +1,7 @@
 #FROM image-registry.openshift-image-registry.svc:5000/openshift/jenkins@sha256:81dc3755056f60a34693121d0da1e93deaaf00d86a72a6a2e5e259a7a09c881c as jenkins
 #FROM image-registry.openshift-image-registry.svc:5000/openshift/jenkins@sha256:e0a054d0a2e3088eb9ac6c65149fec386fefcf2aacc7181fa806cf2fad190a4c as jenkins
-#FROM quay.io/openshift/origin-jenkins@sha256:ed8605f19d17ce84e78aaaac932a347b24ffcd1827d73258ff5628d6366d16df as jenkins
-FROM quay.io/openshift/origin-jenkins@sha256:a7c28e11e20139e69b1a39e0c63a440d7d973f1058fda5e1b862ad7cf937410b as jenkins
+FROM quay.io/openshift/origin-jenkins@sha256:ed8605f19d17ce84e78aaaac932a347b24ffcd1827d73258ff5628d6366d16df as jenkins
+#FROM quay.io/openshift/origin-jenkins@sha256:a7c28e11e20139e69b1a39e0c63a440d7d973f1058fda5e1b862ad7cf937410b as jenkins
 
 USER root
 #RUN yum install -y jenkins-plugin-openshift openshift-origin-cartridge-jenkins
