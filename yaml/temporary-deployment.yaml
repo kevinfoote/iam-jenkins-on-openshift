@@ -1,0 +1,47 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: temporary-deployment
+  name: temporary-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: temporary-deployment
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: temporary-deployment
+    spec:
+      containers:
+      - image: registry.fedoraproject.org/fedora-toolbox
+        imagePullPolicy: Always
+        name: temporary-deployment
+        env:
+        - name: HOME
+          value: /tmp
+        volumeMounts:
+          - name: mount-original
+            mountPath: "/var/original"
+          - name: mount-expanded
+            mountPath: "/var/expanded"
+        command:
+        - sleep
+        - infinity
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "100m"
+        requests:
+          cpu: "0"
+          memory: "0"
+    volumes:
+      - name: mount-original
+        persistentVolumeClaim:
+          claimName: jenkins
+      - name: mount-expanded
+        persistentVolumeClaim:
+          claimName: oit-iam-builder-pvc-next
