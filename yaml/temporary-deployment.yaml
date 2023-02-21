@@ -35,13 +35,13 @@ spec:
           limits:
             memory: "128Mi"
             cpu: "100m"
-        requests:
-          cpu: "0"
-          memory: "0"
-    volumes:
-      - name: mount-original
-        persistentVolumeClaim:
-          claimName: jenkins
-      - name: mount-expanded
-        persistentVolumeClaim:
-          claimName: oit-iam-builder-pvc-next
+          requests:
+            cpu: "0"
+            memory: "0"
+      volumes:
+        - name: mount-original
+          persistentVolumeClaim:
+            claimName: jenkins
+        - name: mount-expanded
+          persistentVolumeClaim:
+            claimName: oit-iam-builder-pvc-next
